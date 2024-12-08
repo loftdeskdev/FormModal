@@ -1,6 +1,6 @@
 # FormModal
 
-Simple Javascript plugin do display dynamic form popups with simple HTML Markups
+A lightweight JavaScript plugin do display dynamic form popups with simple HTML Markups.
 
 It transforms simple HTML buttons into dynamic form popups through data attributes. This plugin eliminates the need for complex form implementations while maintaining flexibility and customization.
 
@@ -106,7 +106,10 @@ The plugin is designed to be lightweight and performant, with a compressed size 
 Add the following script tag to the head of your page
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/loftdeskdev/FormModal@master/dist/formmodal.min.js" defer></script>
+<script
+  src="https://cdn.jsdelivr.net/gh/loftdeskdev/FormModal@master/dist/formmodal.min.js"
+  defer
+></script>
 ```
 
 The plugin automatically handles form creation, validation, submission, and error handling while maintaining a clean and professional appearance. Its flexibility allows for various implementations across different website sections without compromising performance or user experience.

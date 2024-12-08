@@ -233,7 +233,7 @@ class Modal {
         .then((responseData) => {
           if (responseData) {
             this.showConfirmation(
-              responseData.success || "Thank you for submitting the form!"
+              responseData.message || "Thank you for submitting the form!"
             );
           } else {
             this.showError(
