@@ -1,6 +1,6 @@
 {
   "name": "y",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Simple Javascript plugin do display dynamic form popups with simple HTML Markups",
   "main": "index.js",
   "scripts": {
