@@ -61,7 +61,7 @@ class Modal {
         font-weight: bold;
       }
 
-      .custom-modal .form-group input {
+      .custom-modal .form-control {
         width: 100%;
         padding: 10px;
         border-radius: 4px;
@@ -103,7 +103,6 @@ class Modal {
         background-color: #28a745;
         color: white;
         border-radius: 8px;
-        font-size: 1.2rem;
         display: flex;
         align-items: center;
       }
@@ -120,7 +119,6 @@ class Modal {
         background-color: #dc3545;
         color: white;
         border-radius: 8px;
-        font-size: 1.2rem;
       }
 
       .honeypot {
@@ -137,26 +135,25 @@ class Modal {
   }
 
   open() {
-    this.modal.style.display = "flex";
-    this.modal.style.opacity = "1";
-    this.modal.setAttribute("aria-hidden", "false");
-    this.modalContent.setAttribute("tabindex", "-1");
-    this.modalContent.focus();
+    if (this.modal) {
+      this.modal.style.display = "flex";
+      this.modal.style.opacity = "1";
+      this.modal.setAttribute("aria-hidden", "false");
+      this.modalContent.setAttribute("tabindex", "-1");
+      this.modalContent.focus();
+    }
   }
 
   close() {
     this.modal.style.opacity = "0";
-    setTimeout(() => {
-      this.modal.style.display = "none";
-      this.modal.setAttribute("aria-hidden", "true");
-      this.cleanupForm();
-    }, 300);
+    this.timeout = setTimeout(this.cleanupForm.bind(this), 300);
     if (this.triggerElement) {
       this.triggerElement.focus();
     }
   }
 
   cleanupForm() {
+    if (this.timeout) clearTimeout(this.timeout);
     if (this.modal) {
       this.modal.remove();
       this.modal = null;
@@ -275,10 +272,7 @@ class Modal {
     `;
     confirmationMessage.innerHTML = `${checkMarkSvg} ${message}`;
     this.modalContent.appendChild(confirmationMessage);
-
-    setTimeout(() => {
-      this.close();
-    }, 10000);
+    setTimeout(this.close.bind(this), 10000);
   }
 
   showError(message) {
@@ -313,18 +307,27 @@ class Modal {
 
     this.options.fields.forEach((field) => {
       const formGroup = createEl("div", "form-group");
-
       const label = createEl("label");
       label.setAttribute("for", field.name);
       label.textContent = field.label;
       formGroup.appendChild(label);
 
-      const input = createEl("input");
-      input.setAttribute("type", field.type || "text");
-      input.setAttribute("name", field.name);
-      input.setAttribute("placeholder", field.placeholder || "");
-      input.required = field.required || false;
-      formGroup.appendChild(input);
+      let inputField;
+      if (field.type === "select") {
+        inputField = createEl("select", "form-control");
+        field.options.forEach((op) => {
+          const option = createEl("option");
+          option.innerText = op;
+          inputField.appendChild(option);
+        });
+      } else {
+        inputField = createEl("input", "form-control");
+        inputField.setAttribute("type", field.type || "text");
+        inputField.setAttribute("placeholder", field.placeholder || "");
+      }
+      inputField.setAttribute("name", field.name);
+      inputField.required = field.required || false;
+      formGroup.appendChild(inputField);
       this.form.appendChild(formGroup);
     });
 
