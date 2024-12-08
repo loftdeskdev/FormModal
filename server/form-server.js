@@ -8,8 +8,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/", async (req, res) => {
   try {
     const formData = req.body;
-
-    console.log("Form submission:", formData);
+    if (formData.honeypot) {
+      console.log("Honeypot dectected:", formData);
+      return res.sendStatus(403);
+    }
 
     if (!formData.fields || !Array.isArray(formData.fields)) {
       throw new Error("Invalid form data");

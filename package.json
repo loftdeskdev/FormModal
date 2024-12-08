@@ -4,7 +4,7 @@
   "description": "Simple Javascript plugin do display dynamic form popups with simple HTML Markups",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild index.js --bundle --mangle-props=_$ --drop:console --format=iife --minify --sourcemap --target=chrome58,firefox57,safari11,edge16 --outfile=dist/formmodal.min.js",
+    "build": "esbuild index.js --bundle --mangle-props=_$ --drop:console --format=iife --minify --sourcemap --target=chrome58,firefox57,safari11,edge16 --outfile=dist/formmodal.min.js && gzip -fk dist/formmodal.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,4 +1,8 @@
-const dc = (name) => document.createElement(name);
+const createEl = (tag, className) => {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  return el;
+};
 
 class Modal {
   constructor(options) {
@@ -12,7 +16,8 @@ class Modal {
   }
 
   injectCSS() {
-    const style = dc("style");
+    if (document.querySelector(".formModalCss")) return;
+    const style = createEl("style", "formModalCss");
     style.innerHTML = `
       .custom-modal {
         display: none;
@@ -71,6 +76,7 @@ class Modal {
         border-radius: 4px;
         cursor: pointer;
         transition: background-color 0.3s;
+        width: 100%;
       }
 
       .custom-modal .submit-btn:hover {
@@ -117,7 +123,6 @@ class Modal {
         font-size: 1.2rem;
       }
 
-      /* Honeypot (Invisible Field) */
       .honeypot {
         position: absolute;
         width: 0;
@@ -261,9 +266,7 @@ class Modal {
     }
 
     this.form.style.display = "none";
-
-    const confirmationMessage = dc("div");
-    confirmationMessage.classList.add("confirmation-message");
+    const confirmationMessage = createEl("div", "confirmation-message");
 
     const checkMarkSvg = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -282,64 +285,56 @@ class Modal {
     if (this.confirmationMessage) {
       this.confirmationMessage.remove();
     }
-    const errorMessage = dc("div");
-    errorMessage.classList.add("error-message");
+    const errorMessage = createEl("div", "error-message");
     errorMessage.textContent = message;
     this.modalContent.appendChild(errorMessage);
     this.confirmationMessage = errorMessage;
   }
 
   create() {
-    this.modal = dc("div");
-    this.modal.classList.add("custom-modal");
+    this.modal = createEl("div", "custom-modal");
     this.modal.setAttribute("role", "dialog");
     this.modal.setAttribute("aria-labelledby", "modal-title");
     this.modal.setAttribute("aria-hidden", "true");
-    this.modalContent = dc("div");
-    this.modalContent.classList.add("custom-modal-content");
+    this.modalContent = createEl("div", "custom-modal-content");
 
-    this.closeBtn = dc("button");
-    this.closeBtn.classList.add("close");
+    this.closeBtn = createEl("button", "close");
     this.closeBtn.setAttribute("aria-label", "Close Modal");
     this.closeBtn.innerHTML = "&times;";
     this.modalContent.appendChild(this.closeBtn);
 
-    const title = dc("h2");
+    const title = createEl("h2");
     title.id = "modal-title";
     title.textContent = this.options.title || "Sign Up";
     this.modalContent.appendChild(title);
 
-    this.form = dc("form");
+    this.form = createEl("form");
     this.form.addEventListener("submit", this.handleSubmit.bind(this));
 
     this.options.fields.forEach((field) => {
-      const formGroup = dc("div");
-      formGroup.classList.add("form-group");
+      const formGroup = createEl("div", "form-group");
 
-      const label = dc("label");
+      const label = createEl("label");
       label.setAttribute("for", field.name);
       label.textContent = field.label;
       formGroup.appendChild(label);
 
-      const input = dc("input");
+      const input = createEl("input");
       input.setAttribute("type", field.type || "text");
       input.setAttribute("name", field.name);
       input.setAttribute("placeholder", field.placeholder || "");
       input.required = field.required || false;
       formGroup.appendChild(input);
-
       this.form.appendChild(formGroup);
     });
 
-    const honeypotField = dc("input");
+    const honeypotField = createEl("input", "honeypot");
     honeypotField.setAttribute("type", "text");
-    honeypotField.setAttribute("name", "ucaptcha");
-    honeypotField.classList.add("honeypot");
+    honeypotField.setAttribute("name", "honeypot");
     this.form.appendChild(honeypotField);
 
-    const submitBtn = dc("button");
+    const submitBtn = createEl("button", "submit-btn");
     submitBtn.type = "submit";
-    submitBtn.className = "submit-btn";
     submitBtn.textContent = this.options.submitButtonText || "Submit";
     this.form.appendChild(submitBtn);
 
@@ -359,15 +354,16 @@ class Modal {
 }
 
 function initializeModals() {
-  const modalTriggers = document.querySelectorAll(".openModalBtn");
+  const modalTriggers = document.querySelectorAll("[data-form-modal]");
 
   modalTriggers.forEach((trigger) => {
-    trigger.addEventListener("click", function () {
+    trigger.addEventListener("click", function (evt) {
+      evt.preventDefault();
       this.triggerElement = trigger;
 
       const title = trigger.getAttribute("data-title");
       const submitButtonText = trigger.getAttribute("data-submit-button-text");
-      const fieldsJSON = trigger.getAttribute("data-fields");
+      const fieldsJSON = trigger.getAttribute("data-form-modal");
       const actionUrl = trigger.getAttribute("data-action-url");
 
       const fields = JSON.parse(fieldsJSON);

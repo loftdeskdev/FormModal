@@ -1,6 +1,6 @@
 # FormModal
 
-A lightweight JavaScript plugin do display dynamic form popups with simple HTML Markups.
+A lightweight (2kb) JavaScript plugin do display dynamic form popups with simple HTML Markups.
 
 It transforms simple HTML buttons into dynamic form popups through data attributes. This plugin eliminates the need for complex form implementations while maintaining flexibility and customization.
 
@@ -17,22 +17,24 @@ The plugin creates an elegant and intuitive user experience through:
 - Smooth animations for modal transitions
 - Clean, minimal design that adapts to your site's styling
 - Mobile-responsive layout that works across all devices
-- Clear form validation with instant feedback
+- Supports simple form validation with instant feedback
 - Customizable themes and styling options
+- Honeypot (Invisible Field) based bot prevention which is simple yet effective on most bots
 
 ### Low Code and Simple Implementation via HTML attributes
 
 ```html
 <button
-  class="openModalBtn"
   data-title="Sign up for the league"
   data-submit-button-text="Sign Up"
-  data-fields="[...]"
+  data-form-modal="[...]"
   data-action-url="https://api.example.com/submit"
 >
   Open Signup Form
 </button>
 ```
+
+Attribute *data-form-modal* will enable the button or the link to trigger the form
 
 ## Accessible
 
@@ -40,7 +42,7 @@ The plugin follows modern accessibility standards by ensuring keyboard navigatio
 
 ## Small Size and Very Little Overhead
 
-The plugin is designed to be lightweight and performant, with a compressed size under 7.5kb (2.4K compressed) to ensure minimal impact on page load time. It uses vanilla JavaScript without dependencies, making it ideal for projects where performance is critical.
+The plugin is designed to be lightweight and performant, with a compressed size just 2kb (7.4kb minified) to ensure minimal impact on page load time. It uses vanilla JavaScript without dependencies, making it ideal for projects where performance is critical.
 
 ## Configuration Options
 

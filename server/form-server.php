@@ -14,6 +14,11 @@ try {
     if (!$formData) {
         throw new Exception('Invalid form data');
     }
+    
+    if($formData["honeypot"]){
+        throw new Exception('Honeypod detected');
+    }
+
     $logEntry = date('Y-m-d H:i:s') . " - " . json_encode($formData) . "\n";
     file_put_contents('submissions.log', $logEntry, FILE_APPEND);
 

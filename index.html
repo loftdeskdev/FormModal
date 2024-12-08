@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Form Popup Examples</title>
 
-    <script src="https://cdn.jsdelivr.net/gh/loftdeskdev/FormModal@master/dist/formmodal.min.js" defer></script>
+    <script src="./dist/formmodal.min.js" defer></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -62,7 +62,7 @@
 
     <div class="example-section">
         <h2>Basic Contact Form</h2>
-        <button class="openModalBtn" data-title="Contact Us" data-submit-button-text="Send Message" data-fields='[
+        <button class="openModalBtn" data-title="Contact Us" data-submit-button-text="Send Message" data-form-modal='[
                 {"name":"name", "label":"Full Name", "placeholder":"Enter your full name", "required":true},
                 {"name":"email", "label":"Email Address", "type":"email", "placeholder":"Enter your email", "required":true},
                 {"name":"message", "label":"Message", "type":"textarea", "placeholder":"Your message here", "required":true}
@@ -74,7 +74,7 @@
     <div class="example-section">
         <h2>Newsletter Signup</h2>
         <button class="openModalBtn" data-title="Subscribe to Newsletter" data-submit-button-text="Subscribe"
-            data-fields='[
+            data-form-modal='[
                 {"name":"email", "label":"Email Address", "type":"email", "placeholder":"Enter your email", "required":true},
                 {"name":"preferences", "label":"Interests", "type":"checkbox", "options":["News", "Products", "Events"], "required":false}
             ]' data-action-url="https://jsonplaceholder.typicode.com/posts">
@@ -84,7 +84,7 @@
 
     <div class="example-section">
         <h2>Event Registration</h2>
-        <button class="openModalBtn" data-title="Register for Event" data-submit-button-text="Register Now" data-fields='[
+        <button class="openModalBtn" data-title="Register for Event" data-submit-button-text="Register Now" data-form-modal='[
                 {"name":"name", "label":"Full Name", "placeholder":"Enter your full name", "required":true},
                 {"name":"email", "label":"Email Address", "type":"email", "placeholder":"Enter your email", "required":true},
                 {"name":"phone", "label":"Phone Number", "type":"tel", "placeholder":"Enter your phone number", "required":true},
@@ -98,7 +98,7 @@
     <div class="example-section">
         <h2>Product Inquiry</h2>
         <button class="openModalBtn" data-title="Product Information Request" data-submit-button-text="Request Info"
-            data-fields='[
+            data-form-modal='[
                 {"name":"name", "label":"Your Name", "placeholder":"Enter your name", "required":true},
                 {"name":"email", "label":"Email Address", "type":"email", "placeholder":"Enter your email", "required":true},
                 {"name":"product", "label":"Product", "type":"select", "options":["Product A", "Product B", "Product C"], "required":true},
@@ -111,7 +111,7 @@
     <div class="example-section">
         <h2>Job Application</h2>
         <button class="openModalBtn" data-title="Quick Job Application" data-submit-button-text="Submit Application"
-            data-fields='[
+            data-form-modal='[
                 {"name":"name", "label":"Full Name", "placeholder":"Enter your full name", "required":true},
                 {"name":"email", "label":"Email Address", "type":"email", "placeholder":"Enter your email", "required":true},
                 {"name":"phone", "label":"Phone Number", "type":"tel", "placeholder":"Enter your phone number", "required":true},
