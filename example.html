@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form Popup Examples</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/loftdeskdev/FormModal@master/dist/formmodal.min.js" defer></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .example-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        button.openModalBtn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+
+        button.openModalBtn:hover {
+            background: #45a049;
+        }
+
+        .code-preview {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dynamic Form Popup Examples</h1>
+
+    <div class="example-section">
+        <h2>Basic Contact Form</h2>
+        <button class="openModalBtn" data-title="Contact Us" data-submit-button-text="Send Message" data-fields='[
+                {"name":"name", "label":"Full Name", "placeholder":"Enter your full name", "required":true},
+                {"name":"email", "label":"Email Address", "type":"email", "placeholder":"Enter your email", "required":true},
+                {"name":"message", "label":"Message", "type":"textarea", "placeholder":"Your message here", "required":true}
+            ]' data-action-url="https://jsonplaceholder.typicode.com/posts">
+            Contact Form
+        </button>
+    </div>
+
+    <div class="example-section">
+        <h2>Newsletter Signup</h2>
+        <button class="openModalBtn" data-title="Subscribe to Newsletter" data-submit-button-text="Subscribe"
+            data-fields='[
+                {"name":"email", "label":"Email Address", "type":"email", "placeholder":"Enter your email", "required":true},
+                {"name":"preferences", "label":"Interests", "type":"checkbox", "options":["News", "Products", "Events"], "required":false}
+            ]' data-action-url="https://jsonplaceholder.typicode.com/posts">
+            Newsletter Signup
+        </button>
+    </div>
+
+    <div class="example-section">
+        <h2>Event Registration</h2>
+        <button class="openModalBtn" data-title="Register for Event" data-submit-button-text="Register Now" data-fields='[
+                {"name":"name", "label":"Full Name", "placeholder":"Enter your full name", "required":true},
+                {"name":"email", "label":"Email Address", "type":"email", "placeholder":"Enter your email", "required":true},
+                {"name":"phone", "label":"Phone Number", "type":"tel", "placeholder":"Enter your phone number", "required":true},
+                {"name":"ticket", "label":"Ticket Type", "type":"select", "options":["Standard", "VIP", "Group"], "required":true},
+                {"name":"quantity", "label":"Number of Tickets", "type":"number", "min":1, "max":5, "required":true}
+            ]' data-action-url="https://jsonplaceholder.typicode.com/posts">
+            Event Registration
+        </button>
+    </div>
+
+    <div class="example-section">
+        <h2>Product Inquiry</h2>
+        <button class="openModalBtn" data-title="Product Information Request" data-submit-button-text="Request Info"
+            data-fields='[
+                {"name":"name", "label":"Your Name", "placeholder":"Enter your name", "required":true},
+                {"name":"email", "label":"Email Address", "type":"email", "placeholder":"Enter your email", "required":true},
+                {"name":"product", "label":"Product", "type":"select", "options":["Product A", "Product B", "Product C"], "required":true},
+                {"name":"question", "label":"Your Question", "type":"textarea", "placeholder":"What would you like to know?", "required":true}
+            ]' data-action-url="https://jsonplaceholder.typicode.com/posts">
+            Ask About Product
+        </button>
+    </div>
+
+    <div class="example-section">
+        <h2>Job Application</h2>
+        <button class="openModalBtn" data-title="Quick Job Application" data-submit-button-text="Submit Application"
+            data-fields='[
+                {"name":"name", "label":"Full Name", "placeholder":"Enter your full name", "required":true},
+                {"name":"email", "label":"Email Address", "type":"email", "placeholder":"Enter your email", "required":true},
+                {"name":"phone", "label":"Phone Number", "type":"tel", "placeholder":"Enter your phone number", "required":true},
+                {"name":"position", "label":"Position", "type":"select", "options":["Developer", "Designer", "Manager"], "required":true},
+                {"name":"experience", "label":"Years of Experience", "type":"number", "min":0, "max":50, "required":true},
+                {"name":"resume", "label":"Resume", "type":"file", "accept":".pdf,.doc,.docx", "required":true},
+                {"name":"cover_letter", "label":"Cover Letter", "type":"textarea", "placeholder":"Brief introduction...", "required":false}
+            ]' data-action-url="https://jsonplaceholder.typicode.com/posts">
+            Quick Apply
+        </button>
+    </div>
+
+</body>
+
+</html>
